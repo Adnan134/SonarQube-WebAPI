@@ -1,0 +1,22 @@
+import requests
+
+# Configure your SonarQube details here
+sonar_url = "http://localhost:9000"
+project_key = "your_project_key"
+auth_token = "your_sonarqube_token"  # Token for authentication
+
+# Endpoint for project issues
+issues_endpoint = f"{sonar_url}/api/issues/search?projects={project_key}"
+
+# Headers for authentication
+headers = {
+    "Authorization": f"Basic {auth_token}"
+}
+
+response = requests.get(issues_endpoint, headers=headers)
+if response.status_code == 200:
+    issues_data = response.json()
+    print(issues_data)  # or process this data into a report format as needed
+else:
+    print("Failed to fetch data:", response.status_code)
+
